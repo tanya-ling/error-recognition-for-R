@@ -17,6 +17,9 @@ def lemma(analysis1, analysis2):
     except IndexError:
         print('Index error in lemma', analysis1, analysis2)
         return 0
+    except KeyError:
+        print('Key error in lemma', analysis1, analysis2)
+        return 0
     if lemma1 == lemma2:
         return 1
     return 0
@@ -32,6 +35,9 @@ def gramm(analysis1, analysis2):
     except IndexError:
         print('Index error in gramm ', analysis1, analysis2)
         return 0
+    except KeyError:
+        print('Key error in gramm ', analysis1, analysis2)
+        return 0
 
 
 def length(words):
@@ -41,9 +47,13 @@ def length(words):
 
 
 def bastard(analysis):
-    if 'qual' in analysis[0]['analysis']:
-        if analysis[0]['analysis']['qual'] == 'bastard':
-            return 0
+    try:
+        if 'qual' in analysis[0]['analysis']:
+            if analysis[0]['analysis']['qual'] == 'bastard':
+                return 0
+    except:
+        print('bastard error ', analysis)
+        return 1
     return 1
 
 
@@ -76,12 +86,16 @@ first = True
 for line in f:
     data = line.rstrip().split('\t')
     if first:
-        if data[0] == '52218':
+        if data[0] == '3710':
             first = False
         else:
             continue
-    words1 = data[4]
-    words2 = data[5]
+    try:
+        words1 = data[4]
+        words2 = data[5]
+    except IndexError:
+        print('Index Error in data reading', data)
+        continue
     # print('here are the boys', words1,'-----', words2, ' !')
     levenstein = leven(words1, words2)
     analysis1 = m.analyze(words1)
