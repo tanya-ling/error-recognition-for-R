@@ -1,0 +1,12 @@
+Index error in pos [{'analysis': [], 'text': 'krjchat'}, {'text': '\n'}] {'analysis': [], 'text': 'krjchat'}
+Index error in pos [{'analysis': [], 'text': 'vysko'}, {'text': '^'}, {'analysis': [], 'text': 'chila'}, {'text': '\n'}] {'analysis': [], 'text': 'vysko'}
+Index error in pos [{'analysis': [], 'text': 'vysko'}, {'text': '^'}, {'analysis': [], 'text': 'chila'}, {'text': '\n'}] {'analysis': [], 'text': 'chila'}
+Index error in pos [{'analysis': [], 'text': 'povesil'}, {'text': '\n'}] {'analysis': [], 'text': 'povesil'}
+Index error in pos [{'analysis': [], 'text': 'podrastit'}, {'text': '\n'}] {'analysis': [], 'text': 'podrastit'}
+Index error in lemma [{'analysis': [], 'text': 'мусiк'}, {'text': '\n'}] [{'analysis': [{'gr': 'S,жен,неод=вин,ед', 'lex': 'музыка'}], 'text': 'музыку'}, {'text': '\n'}]
+Traceback (most recent call last):
+  File "C:/Tanya/НИУ ВШЭ/диплом/error-recognition-for-R/rlc_add_features.py", line 87, in <module>
+    grammequal = gramm(analysis1, analysis2)
+  File "C:/Tanya/НИУ ВШЭ/диплом/error-recognition-for-R/rlc_add_features.py", line 26, in gramm
+    gram1 = analysis1[0]['analysis'][0]['gr'].split(',')[1:]
+IndexError: list index out of range
