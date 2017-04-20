@@ -77,44 +77,44 @@ def stemming(word1, word2):
     return 0
 
 
-f = codecs.open('rlc_db.csv', 'r', 'utf-8')
-w = codecs.open('rlc_features.csv', 'a', 'utf-8')
-# w.write('sentid	sent	start	finish	error	correction	tag\tlevenstein\tlemmaequal\tgrammequal\tstemequal\t'
-#         'lenorig\tlencorr\tbastard\tpos1\tpos2\r\n')
-
-first = True
-for line in f:
-    data = line.rstrip().split('\t')
-    if first:
-        if data[0] == '3710':
-            first = False
-        else:
-            continue
-    try:
-        words1 = data[4]
-        words2 = data[5]
-    except IndexError:
-        print('Index Error in data reading', data)
-        continue
-    # print('here are the boys', words1,'-----', words2, ' !')
-    levenstein = leven(words1, words2)
-    analysis1 = m.analyze(words1)
-    analysis2 = m.analyze(words2)
-    lenorig = length(words1)
-    lencorr = length(words2)
-    if lencorr == 1 and lenorig == 1:
-        lemmaequal = lemma(analysis1, analysis2)
-        grammequal = gramm(analysis1, analysis2)
-        stemequal = stemming(words1, words2)
-        bast = bastard(analysis1)
-    else:
-        bast = 0
-        stemequal = 0
-        grammequal = 0
-        lemmaequal = 0
-    pos1 = pos(analysis1)
-    pos2 = pos(analysis2)
-    w.write('\t'.join([line.rstrip(), str(levenstein), str(lemmaequal), str(grammequal), str(stemequal),
-        str(lenorig), str(lencorr), str(bast), pos1, pos2]) + '\r\n')
-f.close()
-w.close()
+# f = codecs.open('rlc_db.csv', 'r', 'utf-8')
+# w = codecs.open('rlc_features.csv', 'a', 'utf-8')
+# # w.write('sentid	sent	start	finish	error	correction	tag\tlevenstein\tlemmaequal\tgrammequal\tstemequal\t'
+# #         'lenorig\tlencorr\tbastard\tpos1\tpos2\r\n')
+#
+# first = True
+# for line in f:
+#     data = line.rstrip().split('\t')
+#     if first:
+#         if data[0] == '54480':
+#             first = False
+#         else:
+#             continue
+#     try:
+#         words1 = data[4]
+#         words2 = data[5]
+#     except IndexError:
+#         print('Index Error in data reading', data)
+#         continue
+#     # print('here are the boys', words1,'-----', words2, ' !')
+#     levenstein = leven(words1, words2)
+#     analysis1 = m.analyze(words1)
+#     analysis2 = m.analyze(words2)
+#     lenorig = length(words1)
+#     lencorr = length(words2)
+#     if lencorr == 1 and lenorig == 1:
+#         lemmaequal = lemma(analysis1, analysis2)
+#         grammequal = gramm(analysis1, analysis2)
+#         stemequal = stemming(words1, words2)
+#         bast = bastard(analysis1)
+#     else:
+#         bast = 0
+#         stemequal = 0
+#         grammequal = 0
+#         lemmaequal = 0
+#     pos1 = pos(analysis1)
+#     pos2 = pos(analysis2)
+#     w.write('\t'.join([line.rstrip(), str(levenstein), str(lemmaequal), str(grammequal), str(stemequal),
+#         str(lenorig), str(lencorr), str(bast), pos1, pos2]) + '\r\n')
+# f.close()
+# w.close()
