@@ -86,9 +86,9 @@ def stemming(word1, word2):
 # for line in f:
 #     data = line.rstrip().split('\t')
 #     if first:
-#         if data[0] == '54480':
+# #        if data[0] == '54480':
 #             first = False
-#         else:
+# #        else:
 #             continue
 #     try:
 #         words1 = data[4]

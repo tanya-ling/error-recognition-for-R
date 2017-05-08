@@ -21,6 +21,9 @@ def get_data(string):
     sent = SENTENCES[sent_ind]
     correct = strong[-1][1: -1]
     if correct == 'UL':
+        # очень часто в этих стоках с null по какой-то причине не проставлено исправление, стоит пустая строка. Конечно,
+        # иногда и правда там должно быть исправление на ничего, но неясно, как отсеивать такие случаи, поэтому все
+        # такие лучше убрать совсем
         strong = string.replace('""', '"').replace('false', 'False').replace('true', 'True').split(';')
         dic = strong[6][1: -1]
         try:
@@ -35,6 +38,8 @@ def get_data(string):
             orig = orig.replace('\\', '')
         correct = dic['corrs'].replace('u', '\\u')
         correct = ast.literal_eval('"' + correct + '"')
+        if correct == '':
+            return
         finish = dic['ranges'][0]['end'][6: -1]
         start = dic['ranges'][0]['start'][6: -1]
         tags = ', '.join(dic['tags'])
@@ -43,6 +48,8 @@ def get_data(string):
         finish = strong[-5][1: -1]
         start = strong[-6][1: -1]
         tags = strong[-7][1: -1]
+    if tags == '':
+        return
     w.write('\t'.join([sent_ind, sent, start, finish, orig, correct, tags]) + '\r\n')
 
 w = codecs.open('rlc_db.csv', 'w', 'utf-8')
