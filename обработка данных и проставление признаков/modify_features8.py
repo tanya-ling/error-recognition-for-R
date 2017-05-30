@@ -1,6 +1,7 @@
 import codecs
 from transliterate import translit
 
+
 def get_list(filename):
     k_f = codecs.open(filename, 'r', 'utf-8')
 
@@ -9,10 +10,9 @@ def get_list(filename):
         line = line.rstrip()
         if line != '' and '_' not in line:
             word = line.split(' ')[0].lower()
-            words.append(word)
+            if word not in words:
+                words.append(word)
     k_f.close()
-    words = set(words)
-    words = list(words)
     return words
 
 words = get_list('tf-idr-error.txt')
